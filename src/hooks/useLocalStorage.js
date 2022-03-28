@@ -1,32 +1,32 @@
-import React from 'react'
+
 import  {useState } from "react"
 
-function useLocalStorage(key, initialvalue) {
-    const[storedvalue, setStoredvalue]=useState(()=>{
+function useLocalStorage(key, initialValue) {
+    const[storedValue, setStoredValue]=useState(()=>{
         if(typeof window ==="undefined"){
-            return initialvalue;
+            return initialValue;
 
         } try{
             const item =window.localStorage.getItem(key);
-            return item ? JSON.parse(item): initialvalue
+            return item ? JSON.parse(item): initialValue;
 
         }catch(error){
             console.log(error);
-            return initialvalue;
+            return initialValue;
         }
     });
 const setValue =(value)=>{
     try{
         setStoredValue(value);
-        if(typeof window !== "undefined")
+        if(typeof window !== "undefined"){
         window.localStorage.setItem(key, JSON.stringify(value));
+        }
     }catch(error){
         console.log(error);
     }
     };   
 
-  return 
-    [useLocalStorage, setValue]
+  return [storedValue, setValue]
   
 }
 
